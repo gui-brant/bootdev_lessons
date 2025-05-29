@@ -1,1 +1,1 @@
-# bootdev_lessons
+This is a github page where I upload my modules from the boot.dev course. I have a habit of taking notes directly onto the webpage, so I've decided to upload them here instead for neatness and to make it easier to  look for these notes later.

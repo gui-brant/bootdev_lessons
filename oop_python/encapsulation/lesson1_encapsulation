@@ -1,0 +1,11 @@
+class Wizard:
+    def __init__(self, name, stamina, intelligence):
+        self.name = name
+        self.__stamina__ = stamina
+        self.__intelligence__ = intelligence
+        self.health = 100*stamina
+        self.mana = 10*intelligence
+    #Encapsulation is the term used when we hide complexity.
+    #Functions are a prime example. You don't know necessarily how they work, you just call them (know inputs and outputs).
+    #That said, some stuff is publaic, while others are private.
+    #Making data private is a way of encapsulating so it's easier to use the structures (since you just have to focus on what's important). We do that by using a double underscore like __init__
