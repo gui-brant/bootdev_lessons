@@ -1,0 +1,36 @@
+class Human:
+    def __init__(self, name):
+        self.__name = name
+
+    def get_name(self):
+        return self.__name
+
+
+## don't touch above this line
+
+
+class Archer(Human):
+    def __init__(self, name, num_arrows):
+        super().__init__(name)
+        self.__num_arrows = num_arrows
+
+    def get_num_arrows(self):
+        return self.__num_arrows
+
+    def use_arrows(self, num):
+        if self.__num_arrows < num:
+            raise Exception("not enough arrows")
+        else:
+            self.__num_arrows -= num
+
+
+class Crossbowman(Archer):
+    def __init__(self, name, num_arrows):
+        super().__init__(name, num_arrows)
+
+    def triple_shot(self, target):
+        self.use_arrows(3)
+        name = target.get_name()
+        return f"{name} was shot by 3 crossbow bolts"
+#Error 1: you got lazy to read the instructions carefully and ended up getting the use_arrow() logic incorrectly.
+#Error 2: you did not make use of the parents' getter methods (a.k.a abstractions) and tried to access their properties directly
