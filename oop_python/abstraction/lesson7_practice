@@ -1,0 +1,57 @@
+import random
+
+
+class DeckOfCards:
+    SUITS = ["Hearts", "Diamonds", "Clubs", "Spades"]
+    RANKS = [
+        "Ace",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "Jack",
+        "Queen",
+        "King",
+    ]
+
+    def __init__(self):
+        self.__cards = []
+        self.create_deck()
+    """
+    The instructions wanted you to create a list with all the possible combinations of SUIT + RANK cards by filling a list, [], with tuples, (), 
+    each reprensenting one possible card from the combinations. However, you had to fill the list in the order (rank1, suit1), (rank1, suit2), (rank1, suit3),... (rank13, suit4).
+    """
+    def create_deck(self):
+        for suit in self.SUITS:
+            for counter in range(0, len(self.RANKS)):    
+                card_tuple = (self.RANKS[counter], suit)
+                self.__cards.append(card_tuple)
+                if self.RANKS[counter] == "Spades":
+                    counter +=1
+        print(self.__cards)
+            
+            
+        
+    def shuffle_deck(self):
+        random.shuffle(self.__cards)
+        print(self.__cards)
+
+    def deal_card(self):
+        if self.__cards: #this says: do the action if the list has any items
+            return self.__cards.pop()
+        else:
+            return None
+
+            
+        
+
+    # don't touch below this line
+
+    def __str__(self):
+        return f"The deck has {len(self.__cards)} cards"
+
