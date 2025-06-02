@@ -27,5 +27,5 @@ class Archer(Hero):
         else:
             self.__num_arrows -= 1
             target.take_damage(10)
-#Suggestion 1: you don't need the else statement, since the action has to happen and it won't happen if the Exception is raised.
-#Suggestion 2: you should write "<= 0" instead of "== 0"... it accounts for more situations 
+#Lesson 1: you don't need the else statement, since the action has to happen and it won't happen if the Exception is raised.
+#Lesson 2: you should write "<= 0" instead of "== 0"... it accounts for more situations 
