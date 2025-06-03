@@ -1,0 +1,44 @@
+class Unit:
+    def __init__(self, name, pos_x, pos_y):
+        self.name = name
+        self.pos_x = pos_x
+        self.pos_y = pos_y
+
+    def in_area(self, x_1, y_1, x_2, y_2):
+        #The if-statement that comes below works with a range of positions. The first range is in the x-axis and the second range is in the y-axis.
+        #Now, the most important questions are: 1. How do we represent this range?, and 2. How do we ensure that the program understands the range condition?
+        #Possible solution 1: two lists; one for x_1 to x_2 values and another for y_1 to y_2 values. If pos_x is in the x-list and pos_y is in the y-list, then true. Else, false.
+        #Refinement of solution 1: it's unecessary to make lists. I can just iterate through the numbers.
+        #Solution 2: My previous solution was unnecessarily cluttered. Simply checking for both conditions simultaneously seems to have worked.
+        #Solution 1 draft:
+            #y_list = []
+            #x_list = []
+            #for i in range(x_1, x_2 + 1):
+            #    x_list.append(range[i])
+            #for i in range(y_1, y_2 + 1):
+            #    y_list.append(range[i])
+        if (self.pos_x in range(x_1, x_2 + 1)) and (self.pos_y in range(y_1, y_2 +1)):
+            return True
+        else:
+            return print("False") #I think it works so that it checks the x conditions. If yes, then it checks the y conditions. If any conditions fail, then it just skips to the default "False" return
+            
+
+class Dragon(Unit):
+    def __init__(self, name, pos_x, pos_y, fire_range):
+        super().__init__(name, pos_x, pos_y)
+        self.__fire_range = fire_range
+
+    def breathe_fire(self, x, y, units):
+        #x and y, the inputs, are the coordinates where the attack is centered. self.__fire_range is a variable that sets the space around the attack to create the AOE range.
+        #The challenge is that in_area() tells us weather a unit is in the area, meaning it is hit, but it does not take in the center-point... it takes in the bottom-left and top-right points.
+        #We must define x1, y1, x2, and y2 as the coordinates for the in_area function. The in_area function will be defined by the range of the fire breathe.
+        #If a unit's pos_x and pos_y is within that rangem then they go in the list.
+        hit_units = []
+        x1 = x - self.__fire_range
+        y1 = y - self.__fire_range
+        x2 = x + self.__fire_range
+        y2 = y + self.__fire_range
+        for unit in units:
+            if unit.in_area(x1, y1, x2, y2) == True:
+                hit_units.append(unit)
+        return hit_units             

@@ -1,0 +1,19 @@
+#Polymorphism means that you can create the same variable, object, or function with different bodies in different instances and call them to display that different body for every instance: 
+class Creature():
+    def move(self):
+        print("the creature moves")
+
+class Dragon(Creature):
+    def move(self):
+        print("the dragon flies")
+
+class Kraken(Creature):
+    def move(self):
+        print("the kraken swims")
+
+for creature in [Creature(), Dragon(), Kraken()]:
+    creature.move()
+# prints:
+# the creature moves
+# the dragon flies
+# the kraken swims
