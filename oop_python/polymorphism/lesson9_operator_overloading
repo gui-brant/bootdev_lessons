@@ -1,0 +1,16 @@
+class Sword:
+    def __init__(self, sword_type):
+        self.sword_type = sword_type
+
+    def __add__(self, other):
+        new_sword_iron = Sword("iron")
+        new_sword_steel = Sword("steel")
+        if (self.sword_type == "bronze") and (other.sword_type == "bronze") :
+            return new_sword_iron
+        elif (self.sword_type == "iron") and (other.sword_type == "iron") :
+            return new_sword_steel
+        else:
+            raise Exception("cannot craft")
+        #It's very important to note here that one must create a new object of the class in order to return a valid variable during Operator Overload.
+        #In other words, sure, we crafted our own meaning to "+" by setting a "def __add__", but the only reason we can do that is that we're returning a Sword-type object, NOT ANY OTHER OBJECT.
+        #In this example, if you were to set "new_sword_iron" or "new_sword_steel" to "iron" or "steel", then you'll get a "'str' object has no attribute 'sword_type'" error.
