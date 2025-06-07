@@ -1,0 +1,55 @@
+In pygame, you get to create groups and containers for your method calls.
+
+Generally, if you had to do a larger game, you'd have to stack up method calls on the main loop. This would make that loop very cluttered: 
+
+while True:
+                for event in pygame.event.get():
+                        if event.type == pygame.QUIT:
+                                return 
+                screen.fill("black") #fills the screen with black color
+                
+
+	!	player.draw(screen) #the player has to pop up after the screen pops up but before 		the frame is refreshed
+        !       player.update(dt)  # Update the player object with the current delta time
+        !       player.move(dt)  # Move the player object with the current delta time
+                
+
+		dt = pygame.time.Clock().tick(60)/1000 # .tick() returns the number of milliseconds 		since the last call, so we divide by 1000 to get seconds, meaning the time for 			1/60th of a second, or a frame
+                pygame.display.flip()  # Update the full display Surface to the screen --> must be 		called last in the loop
+
+A way to fix this issue is by creating groups like this:
+	
+	updatable = pygame.sprite.Group() #creates the updatable group for different 	functionalities
+        drawables = pygame.sprite.Group()  #creates the drawable group for different 	functionalities
+	#rest of the while loop
+	
+These groups are a Python collection that can hold "sprite" objects from pygame. You can add objects to the group by using "my_group.add(sprite_instance)"
+
+Now, it sucks to have to added objects manually sometimes, so we can use containers, which would be defined by:
+	
+	updatable = pygame.sprite.Group() #creates the updatable group for different 	functionalities
+        drawables = pygame.sprite.Group()  #creates the drawable group for different 	functionalities
+	Player.containers = (updatable, drawables) #setting the two groups above as containers for 	the Player class
+	#rest of the while loop
+
+This makes it so that every object of the player class created after the containers is defined becomes part of all the groups within the tuple (in this case, updatable and drawables).
+
+Once you call the group in the main loop, like updatables.update(dt), it will run .update(dt) for every "sprite", meaning object on the screen, in the updatables group. For us, that means every instance of the Player class.
+
+Alternatively, you can call:
+for drawable in drawables:
+    drawable.draw(screen)
+
+This loops through every "sprite" in the drawables group (again, that means every Player instance for us) and executes the .draw(screen) method. 
+
+That said, the reason why your player currently does not move is because you did not call this for the player. The containers don't do magic, they just make it so that you don't have to call the same thing multiple times for every single instance of a class. Also, you misread the previous lecture, which led you into not making the necessary modification to update():
+    def update(self, dt):
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_a]:
+            self.rotate(-dt)
+        if keys[pygame.K_d]:
+            self.rotate(dt)
+        self.move(dt)
+
+It did not use to have self.move(dt), hence why the character wouldn't move. 

@@ -1,0 +1,7 @@
+Lesson about running virtual environments for scripts.
+
+Whenever you start a project (in any PL, not just python), it's a good idea to create a virtual environment just for that project. Say that you have to run a library, pygame, in your project. This is called a dependency. Your code depends on that library. Every project will have its own set of dependencies and, hence, it should have its own virtual environment. 
+
+To create a virtual environment: 1. at the top level of your project's directory, type something like "python3 -m venv venv"; 2. Activate the virtual environment by "source venv/bin/activate"; 3. create a text file at the top level of your project's directory to contain all of the dependencies, like pygame==2.6.1; 4. after your text script is full, run "pip install -r requirements.txt" to install all of the requirements onto your virtual environment.
+
+Note: those requirements will be installed onto the virtual environment. Therefore, every time you run the code, you have to make sure that you've activated the environment again.
