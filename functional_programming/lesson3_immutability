@@ -1,0 +1,22 @@
+def add_prefix(document, documents):
+    prefix = f"{len(documents)}. "
+    new_doc = prefix + document
+    new_tuple = (new_doc,)
+    answer = documents + new_tuple
+    return answer
+    #For the reasons explained below, tuples are important in FP since they are immutable lists.
+"""
+To clarify things a little, functional programming is a lot more useful when you're not dealing with the end-user directly.
+Generally speaking, OOP is useful for things like game development, application and GUI development, simulations, APIs, and frameworks.
+Whenever you want to create objects and logical frameworks that will pop-up over and over again (a.k.a be reproducible code), then you go for OOP.
+In games, you do that because the Champion class will be the framework for 200 Champtions. 
+In GUIs and applications, you will need to reutilize widget objects that have similar functions. You might have to update them and will want records of your previous frameworks to build upon.
+
+Now, that comes with an issue, which literally every game and client ever has: a lot of very complicated bugs.
+Things get very interconnected and intricate, so when you update one things, 100 other might be hit out of wack.
+If you're working with data, say in finance or telecommunications, you don't want that to happen. Otherwise people don't have access to their money or can't make a call.
+Imagine you wanna cash something out and, because of a new update, your money got sent to a random person (and the devs currently have no idea what caused it exactly). It would be disastrous!
+For that reason, we have functional programming. It allows us to work with immutable objects. You're locked out from reusing stuff, which makes your work very organized and simple to manage.
+Also, it's useful for things like parallel programming (for its neatness), mathematical modelling, and event-driven programming.
+"""
+
