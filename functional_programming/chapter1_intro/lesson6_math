@@ -1,0 +1,22 @@
+def get_median_font_size(font_sizes):
+    """
+        Steps: 
+        1. Use sorted() to sort out the list.
+        2. Get the length of the list using len()
+        3. Divide that length by //2. Floor division rounds to the lowest number always, so it takes care of the condition.
+        4. Create an if statement in case the list is empty.
+        Issue:
+        3. Recall that the indexes output from sorted start at zero. Therefore,
+            len() for four-index list produces the value 4. 4//2 is 2, which is not
+            the lowest of the two possibilities. Therefore, if even, this value has
+            to be decreased by 1. 
+    """
+    print(len(font_sizes))
+    sorted_list = sorted(font_sizes)
+    median = len(sorted_list)//2
+    if len(sorted_list) == 0:
+        return None
+    elif len(sorted_list)%2 == 0:
+        return sorted_list[median - 1]
+    else:
+        return sorted_list[median]
