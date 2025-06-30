@@ -1,0 +1,17 @@
+import functools
+
+
+def join(doc_so_far, sentence):
+    return f"{doc_so_far}. {sentence}"
+
+
+def join_first_sentences(sentences, n):
+    if n == 0:
+        return ""
+    else:
+        answer = functools.reduce(join,sentences[:n])
+        return answer + "."
+    #You actually solved this one pretty quickly all things consider. 
+    #You understood that .reduce takes a function and just iteratively adds onto by accumulating into a single result.
+    #The only issue was formatting. You were iteratively putting a "." at the end of each input, which caused problems.
+    #As a rule of thumb, watch out when you're using functools.reduce() for these types of formatting problems.
