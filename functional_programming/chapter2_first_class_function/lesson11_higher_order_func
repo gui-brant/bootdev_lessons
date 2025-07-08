@@ -1,0 +1,5 @@
+def restore_documents(originals, backups):
+    #map applies function to every item in a sequence, so it's good for number 1
+    #filter keeps only items that pass a test return so it's good for number 2
+    #lambda functions allow you to create a function in-place like x: x + 10 (if x= 2, then it returns 12)
+    return set(filter(lambda i: not i.isdigit(),map(str.upper, originals + backups)))

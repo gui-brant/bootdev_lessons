@@ -1,0 +1,14 @@
+def remove_invalid_lines(document):
+    """
+    1. We want to split the input document into a list with the separate lines, so we want to split at \n.
+    2. We then use startwith to check if that instance of the iterable starts with -, if it does, then we take the instance
+    out of the list.
+    3. Finally, join the iterable again using \n to separate each instance.
+    Difficulty: use lambda function for 2. and use the filter fucntion for 2.
+    """
+    split_doc = document.split("\n") #recall: document is part of the string class, meaning that split() is a string-type method, which requires a string-type object to be called upon (that's document, in this case)
+    #print(split_doc)
+    check_dash = lambda doc: not doc.startswith("-") #Had to adjust this from "-" to "*" because it would return True for "-," making the filter function only keep lines starting with "-" and we wanted the opposite to happen
+    filtered_doc = filter(check_dash, split_doc) #filter() keeps whatever is returned True for the function and keeps the false stuff out
+    return "\n".join(filtered_doc)
+    
