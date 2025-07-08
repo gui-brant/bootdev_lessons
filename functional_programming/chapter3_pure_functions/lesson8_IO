@@ -1,0 +1,17 @@
+#This was very stressed by the notes just now: pure functions, that is functions that only mutate things inside its scope including inputs,
+#should be used whenever reasonable. They are considerably easier to debug and work with.
+#I/O stands for input/output. In our context, it means interacting with the "outside world," that is anything not stored in the application's memory (like the internet, your hard drive, or a database).
+#The above point means that I/O creates "side-effects" and makes your function impure.
+#The whole point of the exercise is to show that printing to the console is a side-effect.
+def convert_case(text, target_format):
+    if not text or not target_format:
+        raise ValueError(f"no text or target format provided")
+
+    if target_format == "uppercase":
+        return text.upper()
+    if target_format == "lowercase":
+        return text.lower()
+    if target_format == "titlecase":
+        return text.title()
+    raise ValueError(f"unsupported format: {target_format}")
+
