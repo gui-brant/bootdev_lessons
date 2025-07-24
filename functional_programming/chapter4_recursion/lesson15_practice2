@@ -1,0 +1,16 @@
+
+def count_nested_levels(nested_documents, target_document_id, level=1):
+    if nested_documents == {}:
+        return -1
+    for id in nested_documents:
+        if id == target_document_id:
+            return level
+        elif isinstance(nested_documents[id],dict): #must check whether value is dictionary itself
+            #level +=1 #--> this is not right because it changes the level locally; the one below changes per recursion, which is what you should look for all the time
+            result = count_nested_levels(nested_documents[id], target_document_id, level + 1)
+            if result != -1: #this is the way to use the recursion variable assingmnet: so long as you may still keep going, as per some definition, then keep going
+                return result #this way, you ensure that the value of the recursion is "remembered" until you either see that you've found what you were looking for (by matching the condition of the first if-statement) or that you didn't (by matching the condition of this if-statement as a cause of the recursive loop)       
+        #return level --> unnecessary
+    return -1 # --> in case you leave the loop, that means you didn't find what you were looking for, so you can just return the exit value
+
+        

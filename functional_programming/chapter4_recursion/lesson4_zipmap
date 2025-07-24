@@ -1,0 +1,11 @@
+def zipmap(keys, values):
+    if keys == [] or values == []:
+        return {}
+    movie_rating_dict = {}
+    #for i in range(len(keys)): 
+    #    movie_rating_dict[keys[i]] = values[i]
+    #    zipmap(keys, values)
+    movie_rating_dict[keys[0]] = values[0]
+    movie_rating_dict.update(zipmap(keys[1:], values[1:]))
+    return movie_rating_dict
+#Whenever you need to add to a dicitonary, you use .update()

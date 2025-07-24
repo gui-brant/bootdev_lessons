@@ -1,0 +1,8 @@
+def new_collection(initial_docs):
+    #Important note about nonlocal: you only use it if you'll reassign a variable. Never to modify it's content, like in a list or dictionary.
+    copy_docs = initial_docs.copy() #this has to be defined outside the function in order for the program to "remember" what was previously added. This is how you make use of a closure structure.
+    def update_doc(string):
+        copy_docs.append(string)
+        return copy_docs
+    return update_doc
+

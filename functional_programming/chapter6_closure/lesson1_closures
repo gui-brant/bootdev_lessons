@@ -1,0 +1,25 @@
+def word_count_aggregator():
+    doc = ""
+    def word_counter(word):
+        nonlocal doc
+        doc += word + " "
+        return len(doc.split())
+    return word_counter
+    #Closures are functions that keep track of some value directly from where it was defined regardless of its execution later on.
+    #It references variables from outside its own function body. Everything else is defined in a bundle elsewhere.
+    #This is the most common use of function transformers. 
+    #In other words, it allows for you to do this:
+    """
+    harry_potter_aggregator = concatter()
+    harry_potter_aggregator("Mr.")
+    harry_potter_aggregator("and")
+    harry_potter_aggregator("Mrs.")
+    harry_potter_aggregator("Dursley")
+    harry_potter_aggregator("of")
+    harry_potter_aggregator("number")
+    harry_potter_aggregator("four,")
+    harry_potter_aggregator("Privet")
+    
+    print(harry_potter_aggregator("Drive"))
+    # Mr. and Mrs. Dursley of number four, Privet Drive
+    """

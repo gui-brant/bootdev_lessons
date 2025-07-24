@@ -1,0 +1,12 @@
+def find_longest_word(document, longest_word=""):
+    if len(document) == 0: #You failed to put in the base case.
+        return longest_word
+    split_doc = document.split(maxsplit=1)
+    if (len(split_doc[0]) > len(longest_word)):
+        longest_word = split_doc[0]
+    #It works as expected up to here. We just need a way to figure out the index boundary error.
+    if len(split_doc) > 1: 
+        longest_word = find_longest_word(split_doc[1], longest_word)
+    return longest_word
+
+
