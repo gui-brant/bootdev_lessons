@@ -1,0 +1,51 @@
+# str.split divides the a string into a list of substrings divided by whatever is defined within ()
+# str.strip takes away trailing or leading whitespace from a string
+# map executes a function for each item on an iterable, say a list for instance
+# join() joins an iterable of strings with some value in between each string.
+
+def remove_emphasis_from_word(word):
+    #remove ** from a single word
+    #Note: strings are iterables in python
+    #Note 2: lambda functions are useful for simple conditions, function chaining, or list comprehensions; not loops.
+    #Note 3: any string in python can be treated as an iterable, so you can simply add into it as if it were a list.
+    corrected_word = ""
+    for i in range(0, len(word)): #maybe add len(word) + 1, but I think not
+        #add the character if it's not * or sandwiched between letters
+        if "*" != word[i]: 
+            #is * a string? I really meant letter, but how to say that if not for type = str?
+            corrected_word += word[i] 
+        elif 0 < i < len(word) - 1:  # check bounds first
+            if word[i - 1].isalpha() and word[i + 1].isalpha():
+                corrected_word += word[i]
+    return corrected_word
+    #You have to rememeber to always check for boundary positions in these cases
+    #You also have to remember that if you want a second condition, you may use elif
+    #.isalpha() will check whether something is a letter
+        
+def remove_emphasis_from_line(line):
+    #splits a line into words and then uses remove_emphasis_from_word 
+    strip_line = line.strip()
+    word_list = strip_line.split(" ")
+    no_star_list = []
+    for word in word_list:
+        fix_word = remove_emphasis_from_word(word)
+        no_star_list.append(fix_word)
+    return " ".join(no_star_list)
+    #If you create a list and add a word string to that list, Python takes that word as an iterable and will add each character separately instead of the whole word.
+    #Hence, you encountered the error with the loop not taking each word in the word_list, instead it was adding every character to the list.
+    #To fix this, you need to use .append() to add things to lists. 
+    print(no_star_list)
+    return " ".join(no_star_list)
+            
+def remove_emphasis(doc_content):
+    sent_list = doc_content.split("\n")
+    answer_list = []
+    for sentence in sent_list:
+        corrected_sentence = remove_emphasis_from_line(sentence)
+        answer_list.append(corrected_sentence)
+    return "\n".join(answer_list)
+
+word = "   **car** and I   \n   I want ice cream   "
+remove_emphasis(word)
+
+
