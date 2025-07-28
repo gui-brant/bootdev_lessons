@@ -1,0 +1,19 @@
+def create_markdown_image(alt_text):
+    alt_text = f"![{alt_text}]"
+    def url_fnc(url):
+        nonlocal alt_text #have to fectch it with nonlocal to use here
+        url = url.replace("(", "%28").replace(")", "%29") #notice how this can be chained and url has to be assigned
+        url = f"({url})"
+        alt_text = f"{alt_text}{url}"
+        def title_fnc(title = ""): #to make inputs optional, you have to assign a default value to them :)
+            nonlocal alt_text #and it has to be done for each inner function...
+            if title != "":
+                title = f'"{title}"'
+                alt_text = alt_text.replace(")","")
+                alt_text = f"{alt_text} {title})"
+                return alt_text
+            else:
+                return alt_text
+        return title_fnc
+    return url_fnc
+                

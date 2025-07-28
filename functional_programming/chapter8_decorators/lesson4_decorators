@@ -1,0 +1,43 @@
+def markdown_to_text_decorator(func):
+    def wrapper(*args, **kwargs):
+        args_list = list(map(convert_md_to_txt, args))
+        kwargs_tuple = kwargs.items()
+        kwargs_dict = dict(map(lambda kwargs_tuple: (kwargs_tuple[0], convert_md_to_txt(kwargs_tuple[1])), kwargs_tuple))
+        #Remember: map applies the function iteratively to an iterable.
+        #You had to give the output of the lambda function as (kwargs_tuple[0], convert_md_to_txt(kwargs_tuple[1]), which was a requirement of the function that you were applying. Make sure you know that first of all. 
+        return func(*args_list, **kwargs_dict)
+    return wrapper
+"""
+The nice things about *args and **kwargs is that they allow you to generalize inputs. Think about it: the whole point of
+a decorator is that it's completely general. You simply don't know what it's going to be passed onto it, so using these
+variables makes a lot of sense. The starts on them simply tell Python to unpack that argument for later reading.
+That said, you can define a decorator function, with some input, and then another function that actually modifies the
+contents of the decorator function. This second function takes *args and **kwargs as parameters.
+Now, once you define a function along with this decorator, it will activate the wrapper function underneath to do as you please in all cases.
+"""
+"""This was my first iteration of the code:
+def markdown_to_text_decorator(func):
+    def wrapper(*args, **kwargs):
+        args_list = list(map(convert_md_to_txt, args))
+        kwargs_tuple = kwargs.items()
+        kwargs_dict = {}
+        for key_value in kwargs_tuple:
+            kwargs_dict[key_value[0]] = map(lambda kwargs_key_value: convert_md_to_txt(kwargs_key_value[1]), key_value)
+        return func(*args_list, **kwargs_dict)
+    return wrapper
+The issue with this code is that it operates correctly on the variables, but the results don't get assigned anywhere.
+This leads to an output that is simply a pointer address to the memory, like this: <map object at 0x127f2d8>
+So, we have to actually follow what the assignment wanted and we had to do as it's shown right now.
+"""
+
+
+# don't touch below this line
+
+
+def convert_md_to_txt(doc):
+    lines = doc.split("\n")
+    for i in range(len(lines)):
+        line = lines[i]
+        lines[i] = line.lstrip("# ")
+    return "\n".join(lines)
+
