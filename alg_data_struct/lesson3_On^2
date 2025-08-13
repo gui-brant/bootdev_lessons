@@ -1,0 +1,11 @@
+def does_name_exist(first_names, last_names, full_name):
+    for fn in first_names:
+        for ln in last_names:
+            if f"{fn} {ln}" == full_name:
+                return True
+    return False
+    """
+    This code already scans all combinations. You don't require a while loop here. It will try everything to match
+    the if-condition, and if it doens't, then it returns False by defeault. No else statement required.
+    """
+

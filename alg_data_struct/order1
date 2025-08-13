@@ -1,0 +1,28 @@
+def find_last_name(names_dict, first_name):
+     try:
+            return names_dict[first_name]
+     except KeyError:
+         return None
+
+"""
+def find_last_name(names_dict, first_name):
+        if names_dict[first_name]:
+            return names_dict[first_name]
+        else:
+            return None
+
+The issue with the code above: dictionaries don't evaluate to True or False in if statements. They either find the key
+or they throw a KeyError. Therefore, to theoretically handle your if condition, you have to throw the error with a 
+try-except block. The point here is: if names_dict[first_name] doesn't work... it exists or throws an error, never True or False.
+"""
+
+            
+
+"""
+O(1) order works so that the runtime of the algorithm doesn't get any larger regardless of the size of the input.
+What is important to remember about the Big O is that it's always about the size of the input. In fact, it's about 
+whether the size of the algorithm makes the runtime longer.
+
+For instance, O(1) happens with dictionaries because the dictionaries can have 100000 items, but if you're always looking
+up a specific value, then the runtime will be constant regardless of the size of the input dictionary. 
+"""
