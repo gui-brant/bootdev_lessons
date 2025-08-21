@@ -1,0 +1,15 @@
+def insertion_sort(nums):
+    """
+    Insertion sort is actually very useful! It works by keeping track of a number in the list and the value prior to it.
+    It will swap those two numbers if j < j-1, and keep propagating backwards with that logic.
+    If it can't propagate further or j-1> j, then increment i and move to it (i is just a forward tracker).
+    It sounds slow and complicated, but when the data is small or loosely sorted, it's actually super fast.
+    """
+
+    for i in range(len(nums)):
+        j = i
+        prior_j = j -1
+        while j > 0 and nums[j-1]> nums[j]:
+            nums[j], nums[j-1] = nums[j-1], nums[j]
+            j -= 1
+    return nums

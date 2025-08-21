@@ -1,0 +1,14 @@
+class Stack:
+    def __init__(self):
+        self.items = []
+
+    def push(self, item):
+        self.items.append(item)
+
+    def size(self):
+        return len(self.items)
+"""
+Stacks are just stacks. We call them Last-In, First-Out (LIFO), which just means you take from the top and you put it back to the top.
+That is just like a stack of anything in the real world. Don't overthink it.
+"""
+

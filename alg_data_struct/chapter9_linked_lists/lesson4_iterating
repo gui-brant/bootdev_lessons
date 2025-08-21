@@ -1,0 +1,42 @@
+from node import Node
+
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def __iter__(self):
+        node = self.head
+        while node!=None:
+            yield node
+            node = node.next
+"""
+This lesson introduces the concept of yields. It also talks about linked lists, which are just lists that you can only
+acess the next value through a reference in the current value. It makes the structure more predictable that way.
+yield statements create function objects. You create a map of what that function will do with a single object. You assign
+a value to your funciton and it automatically creates an object for you. Every time you use next() for that object
+and assign that to some variable, it will output the next yield in your function:
+
+def create_message_generator():
+    yield "hi"
+    yield "there"
+    yield "friend"
+
+gen = create_message_generator()
+first = next(gen)
+print(first)  # prints: hi
+second = next(gen)
+print(second)  # prints: there
+third = next(gen)
+print(third)  # prints: friend
+"""
+
+    # don't touch below this line
+def __repr__(self):
+    nodes = []
+    current = self.head
+    while current and hasattr(current, "val"):
+        nodes.append(current.val)
+        current = current.next
+    return " -> ".join(nodes)
+

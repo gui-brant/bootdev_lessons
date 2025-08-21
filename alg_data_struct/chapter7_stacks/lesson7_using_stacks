@@ -1,0 +1,31 @@
+from stack import Stack
+
+
+def is_balanced(input_str):
+    """
+    We need equal numbers of ( and ). 
+    But what if it's like this: )()(
+    In this case, the number is equal but the parentheses are still not balanced. 
+    Surely, one of the conditions is that we have the same numbers of ( to ) by the end of the stack.
+    The second condition has to be that whenever a ) is found, it must eventually find another (, otherwise it's bad.
+    Is the above condition enough to suffice our problem? Yes, it is.
+
+    Plan: we add the string to the stack if the string is (. If we find a ) on the next iteration, then we pop the stack.
+    If not, then we add to the stack.
+    """
+    input_stack = Stack()
+    count = 0
+    for string in input_str:
+        if string == "(":
+            input_stack.push(string)
+            count +=1
+        elif string == ")":
+            input_stack.pop()
+            count -=1
+    if not input_stack.items and count==0:
+        return True
+    else:
+        return False
+    
+
+    
