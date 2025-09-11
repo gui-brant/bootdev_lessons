@@ -1,0 +1,37 @@
+from node import Node
+
+
+class LinkedList:
+    def add_to_tail(self, node):
+        if self.head == None:
+            self.head = node
+        else:
+            last_node = None
+            for current_node in self:
+                last_node = current_node
+            last_node.next = node
+"""
+Linked lists cannot be indexed like regular lists. That's the whole point. So if you'd like to find the last
+node, then you'd have to iterate over the entire linked list. Gladly, here, we already had a method created to help
+us in that task. Now, the end of the list is some node marked as the current_node. Every node in the linked list has
+a next attribute, which is the pointer reference to the value of the next node. By setting that to the new node, we
+add a new value to our linked list. In case the head is none, meaning the linked list is originally empty, we simply 
+set our head to the new node, because that would technically be adding a new node to the linked list.
+"""
+    # don't touch below this line
+
+    def __init__(self):
+        self.head = None
+
+    def __iter__(self): #Remember double underscore or dunder mehtods like these modify python's built in functions, like for loops.
+        node = self.head
+        while node is not None:
+            yield node
+            node = node.next
+
+    def __repr__(self):
+        nodes = []
+        for node in self:
+            nodes.append(node.val)
+        return " -> ".join(nodes)
+

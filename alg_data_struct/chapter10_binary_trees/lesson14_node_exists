@@ -1,0 +1,9 @@
+class BSTNode:
+    def exists(self, val):
+        if self.val == val:
+            return True
+        elif self.val < val and self.right:
+            return self.right.exists(val)
+        elif self.val > val and self.left:
+            return self.left.exists(val) #you must return the result of the recursion, if a return is required.
+        return False

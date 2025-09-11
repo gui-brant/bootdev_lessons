@@ -1,0 +1,53 @@
+class HashMap:
+    def insert(self, key, value):
+        self.resize()
+        index = self.key_to_index(key)
+        self.hashmap[index] = (key, value)
+
+    def resize(self):
+        if len(self.hashmap) == 0:
+            self.hashmap.append(None)
+            return self.hashmap
+        load = self.current_load()
+        if load < 0.05:
+            return
+        else:
+            temp = self.hashmap
+            new_hash = [None] * len(temp) * 10
+            print(temp)
+            for i, slot in enumerate(temp): #for x in y fetches elements. for i in range(len(x)) fetches indices. for i, x in enumerate(y) fetches indices as i and elements as x.
+                #new_hash[i] = temp[i] --> This is not valid because indices change when you resize, so you have to recompute the indices.
+                if slot == None: #Had to skip the None's because your code can't handle them, obviously.
+                    continue
+                new_i = self.key_to_index(slot[0])
+                new_hash[new_i] = slot
+            self.hashmap = new_hash
+            print(self.hashmap)
+    def current_load(self):
+        if len(self.hashmap) == 0:
+            return 1 
+        else:
+            count = 0
+            for slot in self.hashmap:
+                if slot != None:
+                    count+=1
+            return count/len(self.hashmap)
+
+    # don't touch below this line
+
+    def __init__(self, size):
+        self.hashmap = [None for i in range(size)]
+
+    def key_to_index(self, key):
+        sum = 0
+        for c in key:
+            sum += ord(c)
+        return sum % len(self.hashmap)
+
+    def __repr__(self):
+        final = ""
+        for i, v in enumerate(self.hashmap):
+            if v != None:
+                final += f" - {str(v)}\n"
+        return final
+

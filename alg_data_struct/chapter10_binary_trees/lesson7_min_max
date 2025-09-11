@@ -1,0 +1,42 @@
+class BSTNode:
+    def get_min(self):
+        current_node = self #don't forget that you can always point to the current object by simply doing this
+        while current_node.left != None:
+                current_node = current_node.left
+        return current_node.val
+        #By creating the currnet_node variable, we can move forward in the tree since that variable changes, but self doesn't
+
+    def get_max(self):
+        current_node = self
+        while current_node.right != None:
+            current_node = current_node.right
+        return current_node.val
+
+    # don't touch below this line
+
+    def __init__(self, val=None):
+        self.left = None
+        self.right = None
+        self.val = val
+
+    def insert(self, val):
+        if not self.val:
+            self.val = val
+            return
+
+        if self.val == val:
+            return
+
+        if val < self.val:
+            if self.left:
+                self.left.insert(val)
+                return
+            self.left = BSTNode(val)
+            return
+
+        if self.right:
+            self.right.insert(val)
+            return
+        self.right = BSTNode(val)
+
+EOF'

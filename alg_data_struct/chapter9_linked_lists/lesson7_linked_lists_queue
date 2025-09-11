@@ -1,0 +1,36 @@
+from node import Node
+
+
+class LinkedList:
+    def add_to_head(self, node):
+        node.set_next(self.head)
+        self.head = node
+        if self.head.next == None: #Here, the tail is the head because the list is empty after head
+            self.tail = self.head #Therefore, we set the value of the tail to be the same as the head
+            
+    def add_to_tail(self, node):
+        if self.head == None:
+            self.head= node
+            self.tail = self.head
+            return 
+        self.tail.set_next(node) #set the reference of the current tail to the node
+        self.tail = node #make the tail into the current node
+        #By having these two together, you're saying: 1. the old tail now references a new value, and 2. this new value that is referenced is now the tail
+        
+    def __init__(self):
+        self.head = None
+        self.tail = None
+    # don't touch below this line
+
+    def __iter__(self):
+        node = self.head
+        while node is not None:
+            yield node
+            node = node.next
+
+    def __repr__(self):
+        nodes = []
+        for node in self:
+            nodes.append(node.val)
+        return " -> ".join(nodes)
+

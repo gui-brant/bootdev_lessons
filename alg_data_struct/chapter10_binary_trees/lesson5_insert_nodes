@@ -1,0 +1,27 @@
+class BSTNode:
+    def __init__(self, val=None):
+        self.left = None # This will be a BSTNode or None
+        self.right = None # This will be a BSTNode or None
+        self.val = val  # This will be a User object
+
+    def insert(self, val):
+        if self.val == None:
+            self.val = val
+            return 
+        if self.val == val:
+            return  
+        if self.val > val and self.left ==None:
+            left_node = BSTNode(val)
+            self.left = left_node
+        elif self.val > val and self.left:
+            self.left.insert(val)
+        elif self.val < val and self.right == None:
+            right_node = BSTNode(val)
+            self.right = right_node
+        else:
+            self.right.insert(val)
+"""
+You were not really locked into this when you wrote it. Think about the different conditions. You just read the instructions
+without thinking about actual possible mistakes and you saw what happened. I guess you were limit testing a bit, but 
+you knew from the get-go that you had to check the right-side condition for the necessity for recursion.
+"""

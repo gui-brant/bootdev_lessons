@@ -1,0 +1,63 @@
+class BSTNode:
+    def delete(self, val):
+        if self.val == None:
+            return None
+        if val < self.val: #we're looking to delete a value that is smaller
+            if self.left: 
+                self.left = self.left.delete(val) #you have to recursively update self.left to be the current node... delete now returns self, which is the current node, hence, self.left = self.left.delete(val) updates self.left to be the current node
+            return self
+        elif val > self.val:
+            if self.right:
+                self.right = self.right.delete(val)
+            return self
+        else: #maybe else won't work here, but it should...
+            if not self.right:
+                return self.left
+            if not self.left:
+                return self.right
+            if self.right and self.left:
+                right_child = self.right
+                while right_child.left != None:
+                    right_child = right_child.left #this is now calling self.right.left, and it will keep going left afterwards.
+                self.val = right_child.val
+                self.right = self.right.delete(right_child.val)
+                return self
+    # don't touch below this line
+
+    def __init__(self, val=None):
+        self.left = None
+        self.right = None
+        self.val = val
+
+    def insert(self, val):
+        if not self.val:
+            self.val = val
+            return
+
+        if self.val == val:
+            return
+
+        if val < self.val:
+            if self.left:
+                self.left.insert(val)
+                return
+            self.left = BSTNode(val)
+            return
+
+        if self.right:
+            self.right.insert(val)
+            return
+        self.right = BSTNode(val)
+
+    def get_min(self):
+        current = self
+        while current.left is not None:
+            current = current.left
+        return current.val
+
+    def get_max(self):
+        current = self
+        while current.right is not None:
+            current = current.right
+        return current.val
+

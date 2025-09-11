@@ -1,0 +1,49 @@
+class BSTNode:
+    def height(self):
+        left_height = 0
+        right_height= 0
+        if self.val == None:
+            return 0
+        if self.right:
+            right_height = self.right.height()
+            
+            #right_height += 1
+        if self.left:
+            left_height = self.left.height()
+            
+            #left_height += 1
+        return max(right_height, left_height) + 1
+"""
+There is a bit about recursion that must be studied here:
+1. How come initializing a variable at the very start of the code doesn't reset the height calculation for every 
+iteration of the recursion?
+Ans: every call to height() does initialize variables at 0... it's just that at every call for a child node, the
+return to its parent will assign the value of left_height or right_height in that parent within the stack. That 
+keeps happening upwards until you're back at the self node. So you'd get this:
+Call chain when you do A.height() (tree starts at A and has three children to the left only as B and C):
+
+1. A.height()
+-Creates left_height=0, right_height=0.
+-Calls B.height().
+
+2. B.height()
+-Creates its own left_height=0, right_height=0.
+-Calls C.height().
+
+3. C.height()
+-Creates its own left_height=0, right_height=0.
+-Since no children, returns 1.
+
+4. Back to B.height()
+-left_height (in B’s frame) is set to 1 from the return value.
+-Returns max(1,0)+1 = 2.
+
+5. Back to A.height()
+-left_height (in A’s frame) is set to 2.
+-Returns max(2,0)+1 = 3.
+
+2. How is it that the height is getting counted if no value is directly being added to right_height or left_height?
+What nature of recursion allows for those variables to go up for every iteration of the recursive call? (note right_height += 1 and #left_height += 1 are commented out)
+Ans: The recursion goes until it can't anymore naturally and it stores whatever the function returns, which is return max(right_height, left_height) + 1, in this case.
+Therefore, max(1,0) + 1 leads to right_height = 2, and so on until it can't go anymore.
+"""
