@@ -1,0 +1,19 @@
+function isClean(review) {
+  let clean = true;
+  if (review.includes("dang")) {
+    clean = false;
+  }
+  if (review.includes("shoot")) {
+    clean = false;
+  }
+  if (review.includes("heck")) {
+    clean = false;
+  }
+  return clean;
+}
+//one cannot return multiple values in JavaScript ;(... it returns the very last thing in the return statement without throwing errors
+//you get around this by returning objects containing the various values :).
+// don't touch below this line
+
+export { isClean };
+

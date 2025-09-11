@@ -1,0 +1,28 @@
+ const userCredits = -2;
+
+// don't touch above this line
+
+if (userCredits>1) {
+  console.log("Sending message...");
+} else {
+  console.log("Not enough credits.");
+}
+/*
+I guess this is just really interesting to note. Just like in Java, you can check for a boolean without having to set variables to True or False:
+Common truthy values include:
+
+true
+42 (any number that isn't 0)
+"hello" (any non-empty string)
+[] (an empty array)
+{} (an empty object)
+function() {} (an empty function)
+Common falsy values include:
+
+false
+0
+"" (an empty string)
+null
+undefined
+NaN (Not a Number)
+*/

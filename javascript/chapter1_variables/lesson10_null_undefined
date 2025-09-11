@@ -1,0 +1,15 @@
+let sentMessages = null;
+let deliveredMessages = null;
+let failedMessages = null;
+/*
+undefined: It doesn't exist at all. In grug-speak undefined is "very nothing"
+null: It (kind of) exists, but it's empty. In grug-speak null is "kinda nothing"
+That's a very important point! It will still mess me up at some point.
+Undeclared varibles are undefined by default.
+*/
+// don't touch below this line
+
+console.log("Sent is null:", sentMessages === null);
+console.log("Delivered is null:", deliveredMessages === null);
+console.log("Failed is null:", failedMessages === null);
+

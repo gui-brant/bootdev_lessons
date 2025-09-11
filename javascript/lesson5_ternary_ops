@@ -1,0 +1,11 @@
+const retryLimit = 10;
+const numRetries = 9;
+
+// don't touch above this line
+
+let messageStatus=numRetries < retryLimit ? "Processing": "Failed"
+//That's really weird... you get to set up the new variable and then ask the condition all in the same line, one following the next
+// don't touch below this line
+
+console.log(messageStatus);
+
