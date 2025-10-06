@@ -1,0 +1,63 @@
+def tsp(cities, paths, dist):
+    distance = 0
+    city_perms = permutations(cities)
+    for i in range(len(city_perms)):
+        #1.sum the distance between each city in the path using "paths" to look up distance
+        """
+        1. We get every i from 0 to len(city_perms) - 1.
+        2. city_perms[i], let's say i=0, would be [0,1,2], where every two values represent a single path from cityA to cityB
+        3. Therefore, city_perms[i-1][i-1] and city_perms[i-1][i] can be used as representations of city's by their number.
+        4. We may then pass that along into paths to extract the actual distance between the two. The following code highlights the logic:
+        """
+        #2. if the total distance of the path is less than the given dist return True
+        """
+        It is told to us, implicitly, that this point is meant to go within the loop of the permutations. It is possible
+        that my logic has worked slightly differently than theirs, so let's analyze:
+        Each iteration of the loop represents an index for a permutation of the cities' path arrangement. 
+        In which case, i at iteration1 represents [0,1,2]. Therefore, our code above (was) not correct.
+        We rely on i to move along for the whole range of len(city_perms) to obtain the whole distance from city_start to city_destination, which is not intended.
+        Ideally, we would like every iteration to represent a path because on each iteration of i, we get a new net path. I'll try a double for loop and see what they do.
+        """
+        for idx in range(len(city_perms[i])):
+            if idx != 0:
+                distance += paths[city_perms[i][idx-1]][city_perms[i][idx]]
+        """
+        Debugging:
+        1. Indentation was incorrect for a moment there around if distance < dist. That caused distance to not be calculated because of the if i!=0 condition.
+        2. The outer if i !=0 condition was residue from my previous logic that I did not revisit when I first tried to fix the logical flow.
+        3. The way I'm using idx in the inner loop is not correct:
+            - i loops into each iteartion of city_perms. city_perms[i=0] = [0,1,2] --> It is a path.
+            - Inside of the inner loop, we loop thorugh the indices of one of city_perm's paths. we call that idx.
+            - Now, city_perms[i][idx] = a city_number for the current path we're looking at.
+        4. I was tunnel visioned in the inner loop, which I fixed, but there was another error that the AI help catch.
+        I have to reset the distance counter for every new path that I'm looking at. That was a debugging mistake of carelessness and was easily fixed with the else statement.
+        """
+        if distance < dist:
+            return True
+        else:
+            distance = 0
+    return False
+
+
+# don't touch below this line
+
+
+def permutations(arr):
+    res = []
+    res = helper(res, arr, len(arr))
+    return res
+
+
+def helper(res, arr, n):
+    if n == 1:
+        tmp = arr.copy()
+        res.append(tmp)
+    else:
+        for i in range(n):
+            res = helper(res, arr, n - 1)
+            if n % 2 == 1:
+                arr[n - 1], arr[i] = arr[i], arr[n - 1]
+            else:
+                arr[0], arr[n - 1] = arr[n - 1], arr[0]
+    return res
+
