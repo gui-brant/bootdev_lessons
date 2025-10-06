@@ -1,0 +1,93 @@
+function processMessages(messages) {
+  let success = true;
+  console.log();
+  setTimeout(() => {
+    finalizeJob(success, messages);
+  }, 0);
+  if (messages < 0) {
+    console.log("invalid data: how do we have negative messages??");
+    success = false;
+    return;
+  }
+  if (messages > 100) {
+    console.log("invalid data: way too many messages");
+    success = false;
+    return;
+  }
+
+  console.log("Doing more stuff...");
+}
+
+function finalizeJob(success, messages) {
+  const msg = success
+    ? 
+    : ;
+  console.log(msg);
+}
+/*Here's a concise version of what I wrote at the bottom of this paragraph that ChatGPT helped me to summarize:
+
+Style/wording fixes — a polished version
+
+Event loop & queues (concise):
+JavaScript runs synchronous code on the call stack. Asynchronous operations (timers, I/O, UI events) are handled by the host. When they finish, the host enqueues a callback: timers and events go to a task queue; promise resolutions go to the microtask queue.
+The event loop continually checks: if the call stack is empty, it drains the microtask queue, then takes the next task.
+setTimeout(fn, d) guarantees at least d ms before fn is enqueued; if the stack is busy, multiple callbacks may pile up, and they run later in enqueue order. This is why a 50ms timer can run before a 100ms timer if both expire while you were blocking.
+Promises/async–await don’t change timing; they make sequencing explicit by chaining microtasks. Prefer them to nested callbacks. Manage concurrency (queues/pools), avoid shared mutable state, and always handle errors (.catch or try/catch). In tests, use fake timers to make timing deterministic.
+
+Below you will find a much more convoluted version of what is written up here.
+*/
+
+/*
+You're already aware of the call stack of synchronous functions.
+You call the function, it is processed, and you get the return value from the top of the call stack.
+That's easy. Now, what about asynchronous functions?
+We use task queues, instead. It's a stadard queue where those async tasks are stored.
+Rememeber that we were talking about the setTimeout's callback in the previous lesson?
+The timeout's callback's job is to mark async tasks to be pushed onto the Task Queue by the browser.
+Then, the program runs and the even loop checks the stack call is empty. (Note here that the event loop is always running.)
+Once the stack call is empty (of the synchronous tasks), the even loop will push the queued tasks to the stack to be triggered.
+Now comes another question. Are the callback's delay timer for the dequeuing or enqueuing.
+  THE TIMER IS FOR ENQUEUING. That means that you can get stuff into the queue in the wrong order if there is really slow code between one callback and another.
+For example, you can have a callback for 100ms followed by 50ms. You'd expected the 50ms one to come first, but what if the code in between takes 100ms to run?
+Then the first one to be queued is the 100ms callback and that gets pushed from the queue to the stack first.
+Now, let's say you expected the 100ms one to execute first because, "hey, I wrote it there first (synchronous code style :cool-emoji:)."
+Fathom this posibility: 1. 100ms callback [0ms net time], 2. 50ms callback [10ms net time], 3. Slow loop [100ms net time to finish]. Now, you're task queue's first item is the 50ms callback.
+In other words, you don't play hopes and dreams with async callback times. The order of the queue becomes too tricky to calculate if you place delays in an order that you think will end up in a certain sequence.
+You also don't go keeping track of the time elapsed in your code runtime because that's just a waste.
+To control the order of your callbacks' queueing, you use one (or more) of the following techniques:
+
+Promises and async/await:
+  Prefer await over nested callbacks. It makes sequencing explicit and keeps errors catchable with try/catch.
+Avoid shared mutable state:
+  Pass needed values as parameters to callbacks, or capture them immutably, so later async work doesn’t see stale/changed state.
+Control concurrency:
+  Use queues/pools or libraries to limit how many tasks run at once.
+  Batch work and debounce/throttle noisy events.
+Distinguish task vs microtask:
+  setTimeout/events enqueue “tasks”.
+  Promise resolutions enqueue “microtasks” (run before tasks when the stack empties). This ordering matters for subtle bugs.
+Always handle errors:
+  For promises: .catch() or try { await ... } catch.
+  Add global handlers as a safety net, but fix local flows.
+Make timing deterministic in tests:
+  Fake timers (e.g., Jest’s fake timers) and explicit await points.
+Architect for flow, not timing:
+  Use state machines or event-driven stores so logic follows states rather than “when this happens after that”.
+
+In short, that's why you use Promises and stuff like "await" or ".then". It gets hard keep track of these things so you just say:
+"Okay, for this delay timer to start, wait for this promise (code) to be executed." That way, you get to ensure some order of queueing.
+*/
+// don't touch below this line
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+processMessages(42);
+await sleep(0);
+console.log("---");
+processMessages(-1);
+await sleep(0);
+console.log("---");
+processMessages(9001);
+

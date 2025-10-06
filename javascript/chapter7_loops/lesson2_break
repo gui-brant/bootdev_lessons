@@ -1,0 +1,30 @@
+function maxMessagesWithinBudget(budget) {
+  //What's the counter?
+  //The counter is the number of messages allowed to be sent.
+  //The counter has to be updated iteratively within the loop.
+  /*
+  I actually typed this into the chatbot for it to say "your reasoning is solid :)":
+  Yeah, "you must discover it while summing costs." That much I did understand. However, the issue here is: if I knew that, then I would be able to answer the question of how many messages are left to go. 
+  You see what I mean? It seems like I have to look ahead of the loop's iteartions to be able to setup the loop... 
+    the only job of the actual loop would be to run through the math of checking the difference in budget and cost and checking how many messages are left, but it's not the logic that finds that upper bound of messages... 
+  it just decreases it by one per iteration, supposedly. My point is: you'll start at 0 messages sent and, say, 500 messages to go. Then all the loop would do would be: hey, now you have 499 message to go... 
+  but that's kind of redundant, maybe? It's a for loop that does the stupidly simple task of keeping track of how many messages you have sent or, better, still can send with the money that you have. 
+  That's not the hard part of the quetsion at all! The hard part is figuring out the upper bound of messages given just the money that you have. 
+  I have to create a loop just for that. It has to be a loop because the cost increases per iteration. You'd try a message and the cost goes up, then you'd try again, until you can't try anymore and the loop breaks. 
+  Then, you'd know what the upper bound is. You'd have to limit test the money without bounds first, with some sort of counter, to then use that counter in the stupidly simple for loop that deals with just iteratively keeping track. 
+  Yeah, that's what I mean. At least, that's where my head is going conceptually... not too sure how to solidly apply it, perhaps.
+  */
+  let counter = 0;
+  let cost = 0;
+  for (;;){
+    cost += 1.0 + counter * 0.01;
+    if (budget<cost){
+      return counter;
+      break;
+    }
+    //budget -= cost; //this is the issue because I'm not dynamically taking away from my budget, as if these were transactions. I'm simply checking if this next iteration will blow up the budget, then you output that.
+    counter++;
+  }
+}
+export { maxMessagesWithinBudget };
+

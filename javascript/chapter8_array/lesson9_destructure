@@ -1,0 +1,27 @@
+function getPrimaryAndBackupMessages(messages) {
+  //[ 'Welcome to Textio!', 'Your order has shipped', 'Reminder: Payment due soon' ] --> '{"primary":"Welcome to Textio!","backups":["Your order has shipped","Reminder: Payment due soon"]}'
+  //It's a classification task
+  const fallback = {
+    primary: undefined,
+    backups: [],
+  };
+  if (messages.length === 0) {
+    return fallback;
+  }
+  let [primary, ...backups] = messages;
+  console.log(messages);
+  console.log(primary);
+  console.log(backups);
+  if (backups.length === 0){
+      backups = [];
+  }
+  console.log(backups);
+  const tagged_messages = {
+    primary,
+    backups,
+  };
+  return tagged_messages
+}
+
+export { getPrimaryAndBackupMessages };
+

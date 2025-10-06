@@ -1,0 +1,15 @@
+function createContact(phoneNumber, name="Anonymous", avatar="default.jpg") {
+  let new_str = ""; //you have to define the variable as let and not const, so it can be modified. Also, it has to be defined here to be accessible anywhere in the function.
+  if (!phoneNumber){ //!phoneNumber is considered falsy. If phoneNumber === "", then that's simply considered falsy too!
+    return "Invalid phone number";
+  }
+  else {
+    new_str =  "/public/pictures/" +avatar;
+  }
+  return ;
+}
+
+// don't touch below this line
+
+export { createContact };
+

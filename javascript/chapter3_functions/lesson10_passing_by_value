@@ -1,0 +1,19 @@
+function getBillForMonth(bill, costPerSend, messagesSent) {
+  bill = costPerSend * messagesSent;
+  return bill
+}
+
+function monthlyBillIncrease(costPerSend, numLastMonth, numThisMonth) {
+  let lastMonthBill = costPerSend*numLastMonth; //it's necessary to declare these variables because functions in JS cannot mutate what's input into them
+  let thisMonthBill = costPerSend*numThisMonth;
+
+  getBillForMonth(lastMonthBill, costPerSend, numLastMonth);
+  getBillForMonth(thisMonthBill, costPerSend, numThisMonth);
+
+  return thisMonthBill - lastMonthBill;
+}
+
+// don't touch below this line
+
+export { getBillForMonth, monthlyBillIncrease };
+

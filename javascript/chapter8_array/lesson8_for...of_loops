@@ -1,0 +1,24 @@
+const getCleanMessages = (messages, badWord) => {
+//for (let wood of woods) is the equivalent of for wood in woods in python. Here, wood is not the index of the array.
+  /*
+  We have to create a new array without the bad words. In other words, we take the string, clear the bad word, and put it back in an array.
+  First, we have to pull the string out of the array. Second, we have to scan the string for the bad word. Third, if we find the bad word, take it out of the string. Fourth, place the string/message in a new array.
+  */
+  let clean_messages = [];
+  let isBadWord = false;
+  for (let message of messages){
+    for (let word of message.split(" ")){ //Looping over strings in JS gives you the letters. You have to split messages by spaces to get the words.
+      if (word.toLowerCase().includes(badWord.toLowerCase())){
+        isBadWord = true;
+      }
+    }
+    if (isBadWord === false){
+      clean_messages.push(message);
+    }
+    isBadWord=false;
+  }
+  return clean_messages;
+};
+
+export { getCleanMessages };
+

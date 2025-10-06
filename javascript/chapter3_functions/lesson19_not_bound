@@ -1,0 +1,27 @@
+const campaign = {
+  name: "Welcome Campaign",
+  maxMessages: 100,
+  sentMessages: 30,
+  sendMessage() {
+    this.sentMessages++;
+  },
+};
+
+function sendWelcome(name, callback) {
+  callback();
+  console.log();
+}
+
+console.log("Campaign Messages:", campaign.sentMessages);
+
+// don't touch above this line
+const boundSendMessage = campaign.sendMessage.bind(campaign)
+sendWelcome("Tyler", boundSendMessage);
+/*
+This is a very interesting point! You can't just bind a method call to a variable and then evoke that in JS, like in Python or Go.
+Here, you'd have to use the .bind(object) method on the method call to be able to create such a variable.
+*/
+// don't touch below this line
+
+console.log("Campaign Messages:", campaign.sentMessages);
+

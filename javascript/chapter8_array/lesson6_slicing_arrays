@@ -1,0 +1,36 @@
+function splitLogs(logs, slug) {
+  /*
+  1.Browse through log in logs.
+    2.Browse through words in logs. Use indices to do that. --> This was not needed.
+    3.If word is slug --> return an object with one of the three:
+      -before: the slice of logs up to the index of slug. That's important: we need to browse through indices and make it go up to the slug index.
+      -after: the slice of logs from slug's index + 1 to the end. "to the end" means omit ending index.
+      -i: the index of slug.
+      else: return before 
+    Note: .includes() looks for a specific item in an array. Like this: console.log(spells.includes("fireball")).
+  */
+  console.log(logs);
+  const fallback = { //Had to create a fallback variable to be output in case everything didn't pass the conditionals at the end.
+        before: [],
+        after: [],
+        i: -1,
+    };
+  if (logs.length === 0 || slug ===""){ //to check for empty arrays, you have to 
+    return fallback;
+  }
+  for (let i=0; i<logs.length;i++){
+    if (logs[i].includes(slug)){
+      console.log(logs.slice(0,i));
+      let object = {
+        before: logs.slice(0,i),
+        after: logs.slice(i+1),
+        i : i,
+    };
+    return object;
+    }
+  }
+  return fallback;
+}
+
+export { splitLogs };
+

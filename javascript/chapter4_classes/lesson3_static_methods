@@ -1,0 +1,27 @@
+class Message {
+  static messageCount = 0;
+  static bodyLengthCount = 0;
+  constructor(recipient, sender, body) {
+    this.recipient = recipient;
+    this.sender = sender;
+    this.body = body;
+    Message.messageCount++; 
+    Message.bodyLengthCount += this.body.length;
+  }
+  static getAverageMessageLength() {
+    let avgMessageLength = Message.bodyLengthCount/Message.messageCount; //Don't forget to declare your variables
+    let roudedAvg = Math.round(avgMessageLength*100)/100
+    return roudedAvg
+  }
+}
+/*
+Static methods or properties are directly bound to the class. This means that they are unique to that class across all
+instances created from the class. This also means that they are bound to the class and not to the objects or instances
+created out of that class. For instance,
+console.log(User.getNumUsers()); // 2 --> This works for the class User [getNumUsers is a static method]
+console.log(lane.getNumUsers()); --> But this doesn't work for the instance "lane".
+*/
+// don't touch below this line
+
+export { Message };
+

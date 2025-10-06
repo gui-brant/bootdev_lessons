@@ -1,0 +1,44 @@
+function sleep(ms) { //using async/await here is pointless because that would force the function to wait the timer before outputting the final promise.
+  //the whole point of the function is that we're making the main thread wait, as to behave like python's sleep.
+  /*Here's the general purpose of async/await:
+Async functions let you write async code that looks synchronous.
+await pauses within the async function until a Promise resolves, then gives you its result, making control flow and error handling simpler.
+Use it when you need to sequence multiple async steps, handle try/catch cleanly, or transform results before returning.
+*/
+
+  return new Promise((resolve) => {
+    setTimeout(() => {resolve();}, ms); //notice here how setTimeout() has two paramters: 
+  });
+}
+/*Let's talk about setTimeout because the way it looks confused me here.
+setTimeout has this structure: setTimeout(() => {resolve();}, ms);
+1. setTimeout has two parameters: the callback and the delay.
+It works like this in simple terms: setTimeout(callback, delay).
+2. setTimeout makes use of an arrow function for simplicity and better flow.
+() => { resolve(); } is just a shorter way to write function() { resolve(); }.
+3. In general, setTimeout takes two parameters: the callback function and the delay.
+The callback function is often written as an arrow function for simplicity.
+The exercise said: Use setTimeout(resolve, ms) inside the Promise to schedule the wait.
+That means the first input is the arrow function solving the resolve and the dealy as ms.
+*/
+
+
+/*About asynchronous code and why JS is good at it:
+The concept of asynchornous code is a very interesting one. Javascript is a single-threaded language.
+That means that if it requires intense computation, like crazy mathematical equations, it does pretty poorly.
+Asynchronous code lets continue one process while waiting for another to finalize.
+As stated by boots:
+"JavaScript is good at handling I/O because its non-blocking event loop plus async APIs let it overlap waiting on I/O with other work. 
+Async is the pattern; non-blocking I/O and the event loop are the mechanism."
+JS is built to handle I/O gracefully because that's what the web is all about.
+It is non-blocking with its main thread, and all that really means is that the main thread continues regardless of whehter it's waiting for another process.
+This could be regular async code or it could be async code created for I/O, like many web apps.
+
+Now, why is it so good at this non blocking business?: event loops 
+As per definition: "The event loop is a single-threaded, non-blocking, event-driven, asynchronous execution model."
+As I've explained, there is a main thread that does not get blocked if you just ask JS to wait a bit to run some function. That is unlike Python, for instance.
+*/
+// don't touch below this line
+
+export { sleep };
+

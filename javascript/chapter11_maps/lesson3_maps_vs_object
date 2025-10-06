@@ -1,0 +1,19 @@
+function fixUserMap(brokenMap) {
+  const fixedMap = new Map();
+  for (let entry of brokenMap){
+    console.log(entry[0])
+    let key = ;//each entry in a map here is a key-value object, and you wanted the value, hence why it looks like that
+    fixedMap.set(key, entry[1]);
+  }
+  return fixedMap
+}
+//Maps can take object keys... but that's not really good as we see in this problem. Of course, to look up the value of an object key, you would need the entire object and not the something simple like "John Smith."
+/* Objects and Maps both work to store key-value pairs, but object is really simple, so why use maps?
+Advantages to using maps in JS:
+Ordered: Map keys are ordered in an easy-to-understand way. Objects are not.
+Iterable: Maps are iterable, so you can use for...of loops on them. Objects are not (without some extra work).
+Performance: Maps are typically faster when you need to do a lot of insertions and deletions.
+No extra properties: Maps don't have any extra built-in properties like __proto__ or constructor that you might not want.
+*/
+export { fixUserMap };
+

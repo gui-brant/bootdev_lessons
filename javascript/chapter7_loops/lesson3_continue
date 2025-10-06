@@ -1,0 +1,40 @@
+function printPrimes(max) {
+  //skip numbers that are not prime up to max, inclusive (supposedly from 0)
+  //missing: 3,5,7
+  //Extra: 25, 29
+  for (let n=2; n<=max;n++){
+    let isPrime = true;
+    if (n === 2) {
+      console.log(n);
+      continue; //if you find that n === 2, then skip all iterations entirely
+    }
+    else if (n%2===0){
+      isPrime=false;
+      continue;
+    }
+    for (let i =3; i<= Math.sqrt(n); i+=2){
+      if (n%i===0){
+        isPrime=false
+        continue;
+      }
+    }
+    if (isPrime){
+      console.log(n);
+    }
+  }
+}
+
+// don't touch below this line
+
+function test(max) {
+  console.log();
+  printPrimes(max);
+  console.log(
+    "===============================================================",
+  );
+}
+
+test(10);
+test(20);
+test(30);
+

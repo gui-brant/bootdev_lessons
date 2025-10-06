@@ -1,0 +1,16 @@
+function deduplicateEmails(emails) {
+  let set = new Set();
+  for (const email of emails){
+    set.add(email);
+    
+  }
+  let final_array = [...set];
+  //the question wanted a set output. You can add a set to an array by following the code above.
+  
+  return final_array;
+}
+
+// don't touch below this line
+
+export { deduplicateEmails };
+

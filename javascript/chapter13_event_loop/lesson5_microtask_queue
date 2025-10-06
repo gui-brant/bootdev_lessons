@@ -1,0 +1,39 @@
+ function processAnalytics(data) {
+  let analysis = "";
+
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(analysis);
+    }, 100);
+
+    setTimeout(() => {
+      analysis += " - Finished!";
+    }, 0);
+
+    // don't touch above this line
+    // js
+    Promise.resolve().then(() => {
+      analysis += ;
+    });
+    // don't touch below this line
+
+    analysis += "Analyzing...";
+  });
+}
+/*I've actually already mentioned this on a previous lesson's note.
+The microtask queue is built for those things under Promimse or wait or .then() or .catch().
+It's a version of the Task Queue that gets prompted before the task queue but after the stack call.
+Promises use this queue to schedule its .then() and .catch() callballs.*/
+
+/*Let's clear up some syntax confusions.
+Promises are promises that something will happen in the future.
+They are declared like this: new Promise((resolve, reject) => { async work}
+
+To consume a Promise, you use .then() and .catch(). .then() is what happens if the Promise is fulfilled. .catch() is what happens if the Promise is not fulfilled, meaning an error.
+
+await is a more modern version of Promise, .then(), and .catch(), but it does the same things:
+To use await, mark a function with async
+*/
+
+export { processAnalytics };
+

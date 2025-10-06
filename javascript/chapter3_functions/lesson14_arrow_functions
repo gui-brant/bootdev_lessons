@@ -1,0 +1,35 @@
+const isSpamMessage = (message) => {
+  if (message.toLowerCase().includes("offer")) {
+    return true;
+  }
+  if (message.toLowerCase().includes("free")) {
+    return true;
+  }
+  return false;
+}
+/*
+Fat arrow functions are usually declared as variables, though regular functions
+can be declared as variables or regular functions. Other than that, just remember
+that fat arrow functions handle object scoping differently and won't work as constructors.
+*/
+// don't touch below this line
+
+function isFunctionType(f) {
+  return f.hasOwnProperty("prototype");
+}
+
+function test(msg) {
+  const isSpam = isSpamMessage(msg);
+  console.log();
+}
+
+test("Get an offer now!");
+test("Free beer in your local area");
+test("Hey mom, sorry I couldn't make it to your birthday...");
+console.log("========================");
+if (isFunctionType(isSpamMessage)) {
+  console.log("isSpamMessage is a classic function");
+} else {
+  console.log("isSpamMessage is a fat arrow function");
+}
+

@@ -1,0 +1,36 @@
+function updateMessageStatus(messageId, currentStatus, isDelivered) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+    /*
+      if (currentStatus === "Sending" && isDelivered === true) {
+        resolve();
+      }else if(currentStatus === "Sending" && isDelivered === false){
+        reject();
+      }if(currentStatus != "Sending"){
+        resolve();
+      Above is how you wrote your code. Below is how he did it. His is way cleaner.*/      
+      if (currentStatus === "Sending") {
+        if (isDelivered) {
+          resolve(
+            ,
+          );
+        } else {
+          reject(
+            ,
+          );
+        }
+      } else {
+        resolve(
+          ,
+        );
+      }
+    /*The point to be made here is:
+    1. General statement for conditionals: it's a good idea to check if there's a variable that is always checked in the coditionals, if so, you can it the overaching umbrella conditional.*/
+    }, 500);
+  });
+}
+
+// don't touch below this line
+
+export { updateMessageStatus };
+

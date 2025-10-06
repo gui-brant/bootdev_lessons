@@ -1,0 +1,9 @@
+const getMostRecentUser = (usernames) => {
+  if (usernames.length===0){ //an empty array is true! don't forget that.
+    return null;
+  }
+  return usernames[usernames.length -1]; 
+};
+
+export { getMostRecentUser };
+

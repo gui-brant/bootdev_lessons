@@ -1,0 +1,26 @@
+const user = {
+  name: "Default User",
+  type: "user",
+};
+
+const adminUser = Object.create(user);
+adminUser.type = "admin";
+
+function isAdmin(object) {
+  const ans = Object.getPrototypeOf(object)
+  if (ans===adminUser){
+    return true
+  }
+  else{
+    return false
+  }
+}
+/*Note here that, because JS works in chains of prototypes for inheritance and object
+creation, it doesn't create copies parent objects in the child. It looks up at the
+object for the parameter and, if it doesn't find it, it looks up in the prototype chain
+for it. So that's what's happening*/
+
+// don't touch below this line
+
+export { user, adminUser, isAdmin };
+
